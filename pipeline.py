@@ -25,12 +25,11 @@ def run():
     log.info("   AI REAL ESTATE INTELLIGENCE PLATFORM — SETUP PIPELINE")
     log.info("=" * 60)
 
-    # Phase 2: Generate dataset
-    log.info("[Phase 2] Data generation …")
-    from src.preprocessing.data_generator import generate_dataset, save_dataset
-    df_raw = generate_dataset(n=20_000)
-    save_dataset(df_raw, RAW_DATA_PATH)
-    log.info("  ✔ Raw dataset: %d rows", len(df_raw))
+    # Phase 2: Merge real datasets
+    log.info("[Phase 2] Merging real datasets …")
+    from src.preprocessing.data_merger import merge_real_datasets
+    from config.settings import DATA_DIR
+    merge_real_datasets(DATA_DIR / "raw", RAW_DATA_PATH)
 
     # Phase 3: Clean data
     log.info("[Phase 3] Data cleaning …")

@@ -24,7 +24,11 @@ st.markdown("""
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
 .stApp { background-color: #0f172a; color: #e2e8f0; }
-.stSidebar { background-color: #1e293b !important; border-right: 1px solid #334155; }
+[data-testid="stSidebar"] { background-color: #1e293b !important; border-right: 1px solid #334155; }
+[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p { color: #cbd5e1 !important; }
+[data-testid="stSidebar"] [role="radiogroup"] label { color: #cbd5e1 !important; }
+[data-testid="stSidebar"] [role="radiogroup"] p { color: #cbd5e1 !important; }
+[data-testid="stSidebar"] [role="radiogroup"] span { color: #cbd5e1 !important; }
 .stButton > button {
     background: linear-gradient(135deg, #6C63FF, #a78bfa);
     color: white; border: none; border-radius: 8px;

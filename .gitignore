@@ -146,3 +146,11 @@ catboost_info/
 .qodo/
 .pixi/
 .tempmediaStorage/
+
+# Data and database files
+data/**/*.csv
+database/*.db
+database/*.db-journal
+*.db
+*.sqlite
+

@@ -1,13 +1,13 @@
 {
   "initial_shape": [
-    20100,
+    35000,
     24
   ],
   "steps": {
     "duplicate_removal": {
-      "before": 20100,
-      "after": 20000,
-      "removed": 100
+      "before": 35000,
+      "after": 35000,
+      "removed": 0
     },
     "dtype_fix": "completed",
     "missing_value_imputation": {
@@ -16,25 +16,25 @@
         "property_type": 0,
         "bhk": 0,
         "bathrooms": 0,
-        "balcony": 593,
+        "balcony": 0,
         "floor_number": 0,
         "total_floors": 0,
         "area_sqft": 0,
         "property_age": 0,
         "furnished_status": 0,
         "parking_availability": 0,
-        "city": 0,
+        "city": 1739,
         "area": 0,
         "locality": 0,
         "pincode": 0,
-        "hospital_distance_km": 581,
+        "hospital_distance_km": 0,
         "school_distance_km": 0,
-        "metro_distance_km": 598,
+        "metro_distance_km": 0,
         "mall_distance_km": 0,
         "airport_distance_km": 0,
         "population_density": 0,
-        "crime_index": 607,
-        "infrastructure_growth_score": 553,
+        "crime_index": 0,
+        "infrastructure_growth_score": 0,
         "price": 0
       },
       "after": {
@@ -42,7 +42,7 @@
         "property_type": 0,
         "bhk": 0,
         "bathrooms": 0,
-        "balcony": 593,
+        "balcony": 0,
         "floor_number": 0,
         "total_floors": 0,
         "area_sqft": 0,
@@ -53,32 +53,34 @@
         "area": 0,
         "locality": 0,
         "pincode": 0,
-        "hospital_distance_km": 581,
+        "hospital_distance_km": 0,
         "school_distance_km": 0,
-        "metro_distance_km": 598,
+        "metro_distance_km": 0,
         "mall_distance_km": 0,
         "airport_distance_km": 0,
         "population_density": 0,
-        "crime_index": 607,
-        "infrastructure_growth_score": 553,
+        "crime_index": 0,
+        "infrastructure_growth_score": 0,
         "price": 0
       }
     },
     "outlier_capping": {
-      "area_sqft": 397,
-      "price": 400,
-      "property_age": 178,
-      "hospital_distance_km": 194,
-      "airport_distance_km": 389
+      "area_sqft": 690,
+      "price": 700,
+      "property_age": 0,
+      "hospital_distance_km": 313,
+      "airport_distance_km": 587
     },
-    "consistency_checks": {},
+    "consistency_checks": {
+      "bathrooms_excessive": 1
+    },
     "derived_features": [
       "price_per_sqft"
     ]
   },
   "final_shape": [
-    20000,
+    35000,
     25
   ],
-  "total_rows_removed": 100
+  "total_rows_removed": 0
 }

@@ -28,7 +28,7 @@ warnings.filterwarnings("ignore")
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from config.settings import (
     FEATURES_DATA_PATH, BEST_MODEL_PATH, MODELS_DIR,
-    TARGET_COLUMN, RANDOM_STATE, TEST_SIZE, CV_FOLDS, N_JOBS
+    TARGET_COLUMN, RANDOM_STATE, TEST_SIZE, CV_FOLDS
 )
 
 logging.basicConfig(level=logging.INFO,
@@ -41,26 +41,26 @@ def get_model_candidates() -> Dict[str, Any]:
     return {
         "Ridge Regression": Ridge(alpha=1.0),
         "Random Forest": RandomForestRegressor(
-            n_estimators=200, max_depth=15,
-            random_state=RANDOM_STATE, n_jobs=N_JOBS
+            n_estimators=100, max_depth=12,
+            random_state=RANDOM_STATE, n_jobs=1
         ),
         "Gradient Boosting": GradientBoostingRegressor(
-            n_estimators=200, learning_rate=0.1,
+            n_estimators=100, learning_rate=0.1,
             max_depth=5, random_state=RANDOM_STATE
         ),
         "XGBoost": XGBRegressor(
-            n_estimators=300, learning_rate=0.05,
+            n_estimators=150, learning_rate=0.08,
             max_depth=6, subsample=0.8,
             colsample_bytree=0.8, random_state=RANDOM_STATE,
-            n_jobs=N_JOBS, verbosity=0
+            n_jobs=1, verbosity=0
         ),
         "LightGBM": LGBMRegressor(
-            n_estimators=300, learning_rate=0.05,
-            num_leaves=63, random_state=RANDOM_STATE,
-            n_jobs=N_JOBS, verbose=-1
+            n_estimators=150, learning_rate=0.08,
+            num_leaves=31, random_state=RANDOM_STATE,
+            n_jobs=1, verbose=-1
         ),
         "CatBoost": CatBoostRegressor(
-            iterations=300, learning_rate=0.05,
+            iterations=150, learning_rate=0.08,
             depth=6, random_seed=RANDOM_STATE,
             verbose=0
         ),
@@ -85,23 +85,23 @@ def compute_metrics(y_true, y_pred) -> Dict[str, float]:
 
 # ── Hyperparameter tuning for best candidate ─────────────────────────────────
 XGB_PARAM_GRID = {
-    "n_estimators": [200, 300, 500],
-    "learning_rate": [0.03, 0.05, 0.1],
+    "n_estimators": [100, 150, 200],
+    "learning_rate": [0.05, 0.08, 0.1],
     "max_depth": [4, 6, 8],
-    "subsample": [0.7, 0.8, 0.9],
-    "colsample_bytree": [0.7, 0.8, 0.9],
+    "subsample": [0.8, 0.9],
+    "colsample_bytree": [0.8, 0.9],
 }
 
 
 def tune_best_model(X_train, y_train) -> Any:
     log.info("Hyperparameter tuning XGBoost …")
-    base = XGBRegressor(random_state=RANDOM_STATE, n_jobs=N_JOBS, verbosity=0)
+    base = XGBRegressor(random_state=RANDOM_STATE, n_jobs=1, verbosity=0)
     rs = RandomizedSearchCV(
         base, XGB_PARAM_GRID,
-        n_iter=20, cv=3,
+        n_iter=5, cv=3,
         scoring="r2",
         random_state=RANDOM_STATE,
-        n_jobs=N_JOBS,
+        n_jobs=1,
         verbose=0,
     )
     rs.fit(X_train, y_train)
@@ -139,10 +139,10 @@ class ModelTrainer:
             y_pred = model.predict(self.X_test)
             metrics = compute_metrics(self.y_test.values, y_pred)
 
-            # Cross validation
+            # Cross validation (sequential execution to avoid Windows pickle issues)
             cv_scores = cross_val_score(
                 model, self.X_train, self.y_train,
-                cv=CV_FOLDS, scoring="r2", n_jobs=N_JOBS
+                cv=CV_FOLDS, scoring="r2", n_jobs=1
             )
             metrics["CV_R2_mean"] = round(cv_scores.mean(), 4)
             metrics["CV_R2_std"]  = round(cv_scores.std(), 4)
