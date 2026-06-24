@@ -1,0 +1,84 @@
+{
+  "initial_shape": [
+    20100,
+    24
+  ],
+  "steps": {
+    "duplicate_removal": {
+      "before": 20100,
+      "after": 20000,
+      "removed": 100
+    },
+    "dtype_fix": "completed",
+    "missing_value_imputation": {
+      "before": {
+        "property_id": 0,
+        "property_type": 0,
+        "bhk": 0,
+        "bathrooms": 0,
+        "balcony": 593,
+        "floor_number": 0,
+        "total_floors": 0,
+        "area_sqft": 0,
+        "property_age": 0,
+        "furnished_status": 0,
+        "parking_availability": 0,
+        "city": 0,
+        "area": 0,
+        "locality": 0,
+        "pincode": 0,
+        "hospital_distance_km": 581,
+        "school_distance_km": 0,
+        "metro_distance_km": 598,
+        "mall_distance_km": 0,
+        "airport_distance_km": 0,
+        "population_density": 0,
+        "crime_index": 607,
+        "infrastructure_growth_score": 553,
+        "price": 0
+      },
+      "after": {
+        "property_id": 0,
+        "property_type": 0,
+        "bhk": 0,
+        "bathrooms": 0,
+        "balcony": 593,
+        "floor_number": 0,
+        "total_floors": 0,
+        "area_sqft": 0,
+        "property_age": 0,
+        "furnished_status": 0,
+        "parking_availability": 0,
+        "city": 0,
+        "area": 0,
+        "locality": 0,
+        "pincode": 0,
+        "hospital_distance_km": 581,
+        "school_distance_km": 0,
+        "metro_distance_km": 598,
+        "mall_distance_km": 0,
+        "airport_distance_km": 0,
+        "population_density": 0,
+        "crime_index": 607,
+        "infrastructure_growth_score": 553,
+        "price": 0
+      }
+    },
+    "outlier_capping": {
+      "area_sqft": 397,
+      "price": 400,
+      "property_age": 178,
+      "hospital_distance_km": 194,
+      "airport_distance_km": 389
+    },
+    "consistency_checks": {},
+    "derived_features": [
+      "price_per_sqft"
+    ]
+  },
+  "final_shape": [
+    20000,
+    25
+  ],
+  "total_rows_removed": 100
+}
